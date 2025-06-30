@@ -33,7 +33,6 @@ A simple Bash script to download audio from YouTube videos and manage metadata.
 
    ```
    sed -i '0,/^DEST_DIR=/s|^DEST_DIR=.*|DEST_DIR="/your/path/here"|' music.sh
-
    ```
 
 4. Run the script with a YouTube URL:
