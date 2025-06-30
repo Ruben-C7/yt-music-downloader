@@ -20,7 +20,7 @@ A simple Bash script to download audio from YouTube videos and manage metadata.
 
    ```
    git clone <repository-url>
-   cd music-downloader
+   cd yt-music-downloader
    ```
 
 2. Make the script executable:
