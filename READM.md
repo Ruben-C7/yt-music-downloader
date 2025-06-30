@@ -29,13 +29,20 @@ A simple Bash script to download audio from YouTube videos and manage metadata.
    chmod +x music.sh
    ```
 
-3. Run the script with a YouTube URL:
+3. Change the Destination directory:
+
+   ```
+   sed -i '0,/^DEST_DIR=/s|^DEST_DIR=.*|DEST_DIR="/your/path/here"|' music.sh
+
+   ```
+
+4. Run the script with a YouTube URL:
 
    ```
    ./music.sh <Youtube URL>
    ```
 
-4. Follow the prompts to edit metadata if desired.
+5. Follow the prompts to edit metadata if desired.
 
 ## License
 
