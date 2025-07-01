@@ -3,7 +3,7 @@
 # Verify the arguments
 if [ -z "$1" ]; then
     echo "Use like: $0 <Youtube URL>"
-    exit 0
+    exit 1
 fi
 
 # Define variables
@@ -23,7 +23,9 @@ FILE_PATH=$(find "$TEMP_DIR" -type f -iname "*.mp3" | head -n 1)
 
 # In case of failure
 if [ ! -f "$FILE_PATH" ]; then
+    echo
     echo "Error: file not found!"
+    rm -rf "$TEMP_DIR"
     exit 2
 fi
 
@@ -33,7 +35,9 @@ echo
 
 # Show the metadata
 echo "Actual metadata:"
-eyeD3 "$FILE_PATH"
+eyeD3 "$FILE_PATH" | grep "^title"
+eyeD3 "$FILE_PATH" | grep "^artist"
+eyeD3 "$FILE_PATH" | grep "^album"
 echo
 
 # Ask if want to change
@@ -46,15 +50,17 @@ if [[ "$edit" =~ ^[sS]$ ]]; then
     read -p "Title: " title
     read -p "Artist: " artist
     read -p "Album: " album
-
+    echo
     # Change the metadata
-    eyeD3 --title "$title" --artist "$artist" --album "$album" "$FILE_PATH"
-    echo "Metadata changed"
+    eyeD3 --title "$title" --artist "$artist" --album "$album" "$FILE_PATH" > /dev/null
+    echo "Metadata changed!"
     echo
 
     # Show the new metadata
     echo "Final metadata: "
-    eyeD3 "$FILE_PATH"
+    eyeD3 "$FILE_PATH" | grep "^title"
+    eyeD3 "$FILE_PATH" | grep "^artist"
+    eyeD3 "$FILE_PATH" | grep "^album"
 
 # If don't want edit
 else
@@ -65,6 +71,7 @@ fi
 # Move to the final directory
 FINAL_DIR="$DEST_DIR/$artist/$album/"
 
+echo
 echo "Moving to $FINAL_DIR..."
 
 mkdir -p "$FINAL_DIR"
