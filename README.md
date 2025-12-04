@@ -1,18 +1,28 @@
-# Music Downloader
+# High Quality Music Downloader
 
-A simple Bash script to download audio from YouTube videos and manage metadata.
+A Bash script to download audio from YouTube videos in the **best available quality** (Opus, M4A, etc.) and manage metadata for media servers like Jellyfin and Navidrome.
 
 ## Features
 
-- Downloads audio in MP3 format.
-- Embeds thumbnail and adds metadata.
-- Allows editing of metadata after download.
-- Organizes downloaded music into artist/album directories.
+- **Best Quality Download:** Automatically selects the highest quality audio format available (no forced MP3 conversion).
+- **Universal Metadata:** Adds/Edits metadata (Title, Artist, Album) compatible with MP3, M4A, Opus, and FLAC.
+- **Media Server Ready:** Tags are optimized for Jellyfin, Navidrome, and other players.
+- **Organization:** Moves downloaded music into `Artist/Album` directories.
+- **Thumbnails:** Embeds the video thumbnail as the album cover.
 
 ## Requirements
 
-- yt-dlp: A command-line program to download videos from YouTube and other sites.
-- eyeD3: A tool for working with audio files, specifically for editing ID3 tags.
+You need to have the following installed on your system:
+
+- **yt-dlp**: To download the audio.
+- **ffmpeg**: To process audio and write metadata to various formats.
+
+### Installation of requirements (Ubuntu/Debian):
+
+```bash
+sudo apt update
+sudo apt install yt-dlp ffmpeg
+```
 
 ## Usage
 
@@ -36,6 +46,8 @@ A simple Bash script to download audio from YouTube videos and manage metadata.
    ```
 
 4. Run the script with a YouTube URL:
+
+   **IMPORTANT:** Always wrap the URL in quotes "" if it contains special characters like &
 
    ```
    ./music.sh <Youtube URL>
